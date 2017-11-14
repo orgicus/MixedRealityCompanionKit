@@ -1,7 +1,7 @@
 ﻿<Window x:Class="KinectIPD.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Kinect IPD" Loaded="Window_Loaded" Closing="Window_Closing"
+        Title="Kinect Exposure Control" Loaded="Window_Loaded" Closing="Window_Closing"
         ResizeMode="NoResize" 
       WindowStyle="None" WindowState="Maximized" Topmost="False"
         Background="Black"
@@ -35,7 +35,7 @@
                     </Grid>
                 </Viewbox>
             </Grid>
-
+            <!--
             <StackPanel Orientation="Vertical" Name="InfoPanel" Visibility="Collapsed">
                 <TextBlock FontFamily="Segoe UI" FontSize="22" Foreground="White" Margin="10,20,0,0" Text="IPD:" >
                     <TextBlock.Effect>
@@ -58,6 +58,7 @@
                     </TextBlock.Effect>
                 </TextBlock>
             </StackPanel>
+            -->
             <Grid Name="instructionOverlay" Background="#00000000">
                 <Grid Width="700" Height="700" >
                     <!--<Ellipse StrokeThickness="2" Stroke="#7C7C7C" Fill="#CC6C7780" />-->
@@ -78,27 +79,28 @@
                     </StackPanel>
                 </Grid>
             </Grid>
-            <Border Name="ToolsPanel"  Visibility="Collapsed" HorizontalAlignment="Right" Margin="2" Padding="10" BorderThickness="1" BorderBrush="#7C7C7C" Background="#55333333">
-                <StackPanel Orientation="Vertical" >
+            <Border Name="ToolsPanel"  Visibility="Collapsed" HorizontalAlignment="Left"  VerticalAlignment="Bottom" Margin="2" Padding="10" BorderThickness="1" BorderBrush="#7C7C7C" Background="#55333333">
+                <StackPanel Orientation="Horizontal" Width="1920" >
+                    <!--
                     <Button HorizontalAlignment="Stretch" Name="clearButton"  Height="50" Content="Clear" Margin="5" Background="#88111111" Foreground="White" Click="clearButton_Click" Focusable="False"></Button>
                     <Button HorizontalAlignment="Stretch" Name="pauseButton"  Height="50" Content="Pause" Margin="5" Background="#88111111" Foreground="White" Click="pauseButton_Click" Focusable="False"></Button>
                     <Button HorizontalAlignment="Stretch" Name="submitIpd"  Height="50" Content="Save IPD" Margin="5" Background="#88111111" Foreground="White" Click="submitIpd_Click" Focusable="False"></Button>
                     <Button HorizontalAlignment="Stretch" Name="resetNFCTag"  Height="50" Content="Reset NFC Tag" Margin="5" Background="#88111111" Foreground="White" Click="resetNFCTag_Click" Focusable="False"></Button>
                     <Button HorizontalAlignment="Stretch" Name="recordXEF"  Height="50" Content="Record Session" Margin="5" Background="#88111111" Foreground="White" Click="recordXEF_Click" Focusable="False"></Button>
                     <Button HorizontalAlignment="Stretch" Name="playXEF"  Height="50" Content="Play Session" Margin="5" Background="#88111111" Foreground="White" Click="playXEF_Click" Focusable="False"></Button>
-                    
-                    <StackPanel Name="settingsPanel" Orientation="Vertical" >
+                    -->
+                    <StackPanel Name="settingsPanel" Orientation="Vertical" Width="1920">
                         <CheckBox Name="AutoExposure" Foreground="White" FontSize="10" Unchecked="AutoExposure_Checked" Checked="AutoExposure_Checked">Auto Exposure</CheckBox>
                         <TextBlock Name="ExposureText" Text="Exposure" Foreground="White" FontSize="10"></TextBlock>
-                        <Slider Orientation="Horizontal" Name="Exposure" Minimum="0" Maximum="100" Value="50" HorizontalAlignment="Stretch" ValueChanged="Settings_Changed"></Slider>
+                        <Slider Orientation="Horizontal" Name="Exposure" Minimum="0" Maximum="10" Value="1.0" HorizontalAlignment="Stretch" ValueChanged="Settings_Changed"></Slider>
                         <TextBlock Name="LumaText" Text="Target Luma" Foreground="White" FontSize="10"></TextBlock>
                         <Slider Orientation="Horizontal" Name="TargetLuma" Minimum="0" Maximum="1" Value=".8" SmallChange=".1" LargeChange=".25" HorizontalAlignment="Stretch" ValueChanged="Settings_Changed"></Slider>
-
+                        <!--
                         <TextBlock Text="Show IPD After Measurement" Foreground="White" FontSize="10"></TextBlock>
                         <CheckBox Name="ShowIPDAfterMeasurement" IsChecked="True" HorizontalAlignment="Stretch" Checked="Settings_Changed" Unchecked="Settings_Changed"></CheckBox>
                         <TextBlock Text="Vertical Offset" Foreground="White" FontSize="10"></TextBlock>
                         <Slider Orientation="Vertical" Name="eyeBoxOffset" Height="250" Minimum="-100" Maximum="100" SmallChange="10" LargeChange="20"></Slider>
-
+                        
                         <Border Background="#11000000" Margin="0,5,0,5" >
                             <StackPanel Margin="5" >
                                 <TextBlock Text="HoloLens Programming Mode" Foreground="White" FontSize="10"></TextBlock>
@@ -107,7 +109,6 @@
                                 <RadioButton Name="ModeList_NFC" GroupName="ModeList" Foreground="White" FontSize="15"  Checked="ModeList_Checked">NFC Tags</RadioButton>
                             </StackPanel>
                         </Border>
-                        
                         <StackPanel HorizontalAlignment="Stretch" Name="DeviceListContainer">
                             <Button HorizontalAlignment="Stretch" Name="setCredentials" Height="50" Content="Add Device" Margin="5" Background="#88333333" Foreground="White" Click="setCredentials_Click" Focusable="False"></Button>
                             <ItemsControl HorizontalAlignment="Stretch" Height="250" Name="DeviceList" Background="#88333333" Foreground="White" BorderThickness="1">
@@ -121,10 +122,11 @@
                                 </ItemsControl.ItemTemplate>
                             </ItemsControl>
                         </StackPanel>
+                        -->
                     </StackPanel>
                 </StackPanel>
             </Border>
-
+            <!--
             <StackPanel HorizontalAlignment="Left" Name="CurrentDeviceContainer" VerticalAlignment="Center">
                 <TextBlock Text="Current HoloLens:" Margin="5" Foreground="White" FontSize="25"></TextBlock>
                 <TextBlock Name="CurrentDeviceNameText" Margin="5" Foreground="White" FontSize="30"></TextBlock>
@@ -157,6 +159,7 @@
 
 
             </TextBlock>
+        -->
         </Grid>
     </Viewbox>
 </Window>

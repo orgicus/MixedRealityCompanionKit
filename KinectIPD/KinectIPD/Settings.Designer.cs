@@ -49,7 +49,7 @@ namespace KinectIPD {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("10")]
+        [global::System.Configuration.DefaultSettingValueAttribute("0.1")]
         public float Exposure {
             get {
                 return ((float)(this["Exposure"]));

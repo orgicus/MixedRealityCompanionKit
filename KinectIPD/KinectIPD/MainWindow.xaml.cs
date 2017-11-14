@@ -209,8 +209,8 @@ namespace KinectIPD
             {
                 case Mode.DeviceList:
                     _holoDeviceManager = new HoloDeviceManager();
-                    DeviceList.ItemsSource = _holoDeviceManager.Devices;
-                    SelectDeviceList.ItemsSource = _holoDeviceManager.Devices;
+                    //DeviceList.ItemsSource = _holoDeviceManager.Devices;
+                    //SelectDeviceList.ItemsSource = _holoDeviceManager.Devices;
 
                     // Enable this to automatically add a LocalHost hololens with a known username and password
                     if (false)
@@ -235,9 +235,9 @@ namespace KinectIPD
                 _holoDeviceManager_CurrentDeviceChanged(_holoDeviceManager, _holoDeviceManager.CurrentDevice);
             }
 
-            DeviceListContainer.Visibility = _currentMode == Mode.DeviceList ? Visibility.Visible : Visibility.Hidden;
-            CurrentDeviceContainer.Visibility = _currentMode != Mode.DisplayOnly ? Visibility.Visible : Visibility.Hidden;
-            SelectDeviceList.Visibility = _currentMode == Mode.DeviceList ? Visibility.Visible : Visibility.Hidden;
+            //DeviceListContainer.Visibility = _currentMode == Mode.DeviceList ? Visibility.Visible : Visibility.Hidden;
+            //CurrentDeviceContainer.Visibility = _currentMode != Mode.DisplayOnly ? Visibility.Visible : Visibility.Hidden;
+            //SelectDeviceList.Visibility = _currentMode == Mode.DeviceList ? Visibility.Visible : Visibility.Hidden;
         }
 
         private void _holoDeviceManager_CurrentDeviceChanged(object sender, HoloDevice currentDevice)
@@ -246,20 +246,20 @@ namespace KinectIPD
             {
                 Dispatcher.Invoke(new Action(() =>
                 {
-                    CurrentDeviceNameText.Text = currentDevice.ToString();
+                ///    CurrentDeviceNameText.Text = currentDevice.ToString();
                 }));
             }
             switch (_currentMode)
             {
                 case Mode.DeviceList:
-                    SelectDeviceList.SelectedItem = currentDevice;
+                   // SelectDeviceList.SelectedItem = currentDevice;
                     break;
                 case Mode.NFCReader:
                     if (currentDevice == null)
                     {
                         Dispatcher.Invoke(new Action(() =>
                         {
-                            CurrentDeviceNameText.Text = "Waiting for NFC tag.";
+                     //       CurrentDeviceNameText.Text = "Waiting for NFC tag.";
                         }));
                     }
                     else if (!currentDevice.IsValid)
@@ -320,7 +320,7 @@ namespace KinectIPD
 
             //MouseDown += MainWindow_MouseDown;
             KeyDown += MainWindow_KeyDown;
-            eyeBoxOffset.ValueChanged += EyeBoxOffset_ValueChanged;
+            //eyeBoxOffset.ValueChanged += EyeBoxOffset_ValueChanged;
 
             canvas.Children.Add(_leftPupilImageRecoVisual);
             canvas.Children.Add(_rightPupilImageRecoVisual);
@@ -355,6 +355,8 @@ namespace KinectIPD
             _poissonDisk[15] = new Point(0.039766, -0.396100);
 
             #endregion
+
+            ToggleDebugMode();
         }
 
         private void Window_Closing(object sender, CancelEventArgs e)
@@ -381,7 +383,7 @@ namespace KinectIPD
 
         private void EyeBoxOffset_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            _kinect.EyeBoxVerticalOffset = (int)eyeBoxOffset.Value;
+            //_kinect.EyeBoxVerticalOffset = (int)eyeBoxOffset.Value;
             FindPupils();
         }
 
@@ -420,10 +422,10 @@ namespace KinectIPD
                     break;
                 case System.Windows.Input.Key.Up:
                 case System.Windows.Input.Key.Down:
-                    if (e.Key == System.Windows.Input.Key.Up)
-                        eyeBoxOffset.Value += 5;
-                    else
-                        eyeBoxOffset.Value -= 5;
+                    //if (e.Key == System.Windows.Input.Key.Up)
+                        //eyeBoxOffset.Value += 5;
+                    //else
+                        //eyeBoxOffset.Value -= 5;
                     FindPupils();
                     break;
                 case System.Windows.Input.Key.R:
@@ -489,8 +491,8 @@ namespace KinectIPD
             _hasValidIPD = false;
             _currentAcceptableStdDev = _acceptableStdDevStart;
             _ipds = new List<double>();
-            if (!_isDebugMode)
-                debugMessage.Text = "";
+            //if (!_isDebugMode)
+            //    debugMessage.Text = "";
             IPDText = string.Empty;
             DistanceText = "";
         }
@@ -508,13 +510,13 @@ namespace KinectIPD
             if (_isPaused)
             {
                 _kinect.PauseCapture();
-                pauseButton.Content = "Resume";
+                //pauseButton.Content = "Resume";
                 FindPupils();
             }
             else
             {
                 _kinect.ResumeCapture();
-                pauseButton.Content = "Pause";
+                //pauseButton.Content = "Pause";
             }
         }
 
@@ -526,8 +528,8 @@ namespace KinectIPD
                 TogglePause(false);
                 camera.Visibility = Visibility.Collapsed;
                 ToolsPanel.Visibility = Visibility.Collapsed;
-                InfoPanel.Visibility = Visibility.Collapsed;
-                debugMessage.Visibility = Visibility.Collapsed;
+                //InfoPanel.Visibility = Visibility.Collapsed;
+                //debugMessage.Visibility = Visibility.Collapsed;
             }
             else
             {
@@ -535,8 +537,8 @@ namespace KinectIPD
                 testingOverlay.Visibility = Visibility.Collapsed;
                 camera.Visibility = Visibility.Visible;
                 ToolsPanel.Visibility = Visibility.Visible;
-                InfoPanel.Visibility = Visibility.Visible;
-                debugMessage.Visibility = Visibility.Visible;
+                //InfoPanel.Visibility = Visibility.Visible;
+                //debugMessage.Visibility = Visibility.Visible;
             }
         }
 
@@ -560,11 +562,11 @@ namespace KinectIPD
 
         private void LoadSettings()
         {
-            ShowIPDAfterMeasurement.IsChecked = Settings.Default.ShowIPDAfterMeasurement;
+            //ShowIPDAfterMeasurement.IsChecked = Settings.Default.ShowIPDAfterMeasurement;
             Exposure.Value = Settings.Default.Exposure;
             TargetLuma.Value = Settings.Default.TargetLuma;
             AutoExposure.IsChecked = Settings.Default.AutoExposure;
-            ModeList_Display.IsChecked = true;
+            //ModeList_Display.IsChecked = true;
             Task t = Task.Run(() =>
             {
                 while (!_kinect.HasFrame)
@@ -589,7 +591,7 @@ namespace KinectIPD
                 _exposure.SetExposure((float)Exposure.Value);
             Logger.Log("Exposure set: " + Exposure.Value);
             Settings.Default.Exposure = (float)Exposure.Value;
-            Settings.Default.ShowIPDAfterMeasurement = (bool)ShowIPDAfterMeasurement.IsChecked;
+            //Settings.Default.ShowIPDAfterMeasurement = (bool)ShowIPDAfterMeasurement.IsChecked;
             Settings.Default.AutoExposure = (bool)AutoExposure.IsChecked;
             Settings.Default.TargetLuma = (float)TargetLuma.Value;
             Settings.Default.Save();
@@ -843,7 +845,7 @@ namespace KinectIPD
                 UpdateState();
             }
 
-            RecordingIndicator.Visibility = _recorder.IsRecording ? Visibility.Visible : Visibility.Collapsed;
+            //RecordingIndicator.Visibility = _recorder.IsRecording ? Visibility.Visible : Visibility.Collapsed;
         }
 
         volatile bool busy = false;
@@ -1018,7 +1020,7 @@ namespace KinectIPD
             {
                 try
                 {
-                    debugMessage.Text = message + "\n" + debugMessage.Text;
+                    //debugMessage.Text = message + "\n" + debugMessage.Text;
                     Logger.Log(message);
                 }
                 catch { }
@@ -1032,7 +1034,7 @@ namespace KinectIPD
 
         private void SelectDeviceList_Selected(object sender, RoutedEventArgs e)
         {
-            _holoDeviceManager.SetCurrentDevice((HoloDevice)SelectDeviceList.SelectedItem);
+           // _holoDeviceManager.SetCurrentDevice((HoloDevice)SelectDeviceList.SelectedItem);
         }
 
         private void DeviceDeleteButton_Click(object sender, RoutedEventArgs e)
@@ -1094,10 +1096,10 @@ namespace KinectIPD
         private void ModeList_Checked(object sender, RoutedEventArgs e)
         {
             Mode newMode = Mode.DisplayOnly;
-            if ((RadioButton)sender == ModeList_List)
-                newMode = Mode.DeviceList;
-            else if ((RadioButton)sender == ModeList_NFC)
-                newMode = Mode.NFCReader;
+            //if ((RadioButton)sender == ModeList_List)
+            //    newMode = Mode.DeviceList;
+            //else if ((RadioButton)sender == ModeList_NFC)
+            //    newMode = Mode.NFCReader;
             ChangeIPDMode(newMode);
         }
     }

@@ -114,6 +114,7 @@
     <Compile Include="KinectExposure.cs" />
     <Compile Include="Logger.cs" />
     <Compile Include="HoloDevice.cs" />
+    <Compile Include="Settings.cs" />
     <Compile Include="Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
